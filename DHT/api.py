@@ -57,8 +57,8 @@ def Dlist(request):
                 recipient_list = ['lamyaeouladali@gmail.com']
                 send_mail(subject, message, email_from, recipient_list)
 
-                telegram_token = '8003884599:AAGzpSB7YpCtQW5h4OioFaOtFwZNxfUHDO8'
-                chat_id = '8013623828'
+                telegram_token = os.getenv('TELEGRAM_BOT_TOKEN')
+                chat_id = os.getenv('TELEGRAM_CHAT_ID')
                 telegram_message = f'La température ({temp}°C) dépasse le seuil de 10°C. Veuillez intervenir immédiatement pour vérifier et corriger cette situation.'
                 send_telegram_message(telegram_token, chat_id, telegram_message)
 
