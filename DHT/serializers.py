@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Dht11
+from .models import Enregistrement  # Import the updated model
 
-class DHT11serialize(serializers.ModelSerializer):
+class EnregistrementSerializer(serializers.ModelSerializer):  # Update serializer name
     class Meta:
-        model = Dht11
-        fields = '__all__'
+        model = Enregistrement  # Use the updated model
+        fields = '__all__'  # Include all fields of the Enregistrement model
