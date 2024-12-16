@@ -38,3 +38,20 @@ class Alerte(models.Model):
     id_utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     date_alerte = models.DateTimeField(auto_now_add=True)
     niveau_alerte = models.IntegerField()
+
+class TemperatureThreshold(models.Model):
+    id_threshold = models.BigAutoField(primary_key=True)
+    label = models.CharField(max_length=100)  # e.g., "Normal Temperature Range", "Critical Temperature Range 1"
+    min_value = models.FloatField(default=0.0)
+    max_value = models.FloatField(default=100.0)
+
+    def __str__(self):
+        return f"{self.label} [{self.min_value} - {self.max_value}]"
+
+class OperatorAssignment(models.Model):
+    id_assignment = models.BigAutoField(primary_key=True)
+    operator = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    max_alerts = models.IntegerField(default=0)  # Max number of alerts for the operator
+
+    def __str__(self):
+        return f"{self.operator.nom} {self.operator.prenom} - Max Alerts: {self.max_alerts}"

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from . import api
 from django.contrib.auth import views as auth_views
+from .api import enregistrement_list
 
 urlpatterns = [
     path("api",api.Dlist,name='json'),
@@ -16,5 +17,6 @@ urlpatterns = [
     path('chart-data-semaine/',views.chart_data_semaine,name='chart-data-semaine'),
     path('chart-data-mois/',views.chart_data_mois,name='chart-data-mois'),
     path('', views.home, name='home'),
+    path('api/enregistrements/', enregistrement_list, name='enregistrement-list'),
 
 ]

@@ -70,3 +70,9 @@ def Dlist(request):
             return Response(serial.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def enregistrement_list(request):
+    enregistrements = Enregistrement.objects.all().order_by('-date_enregistrement')  # Latest first
+    serializer = EnregistrementSerializer(enregistrements, many=True)
+    return Response(serializer.data)
