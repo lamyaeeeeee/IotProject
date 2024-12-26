@@ -1,0 +1,10 @@
+.env
+.idea/
+# Ignore Python cache files
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
