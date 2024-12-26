@@ -1,4 +1,4 @@
-from .models import Enregistrement  # Replace Dht11 with Enregistrement
+from .models import Enregistrement, Capteur   # Replace Dht11 with Enregistrement
 from .serializers import EnregistrementSerializer  # Update serializer name
 from .models import TemperatureThreshold
 from .serializers import TemperatureThresholdSerializer
@@ -134,3 +134,33 @@ def operator_assignments(request):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
         return Response({'message': 'Assignments updated successfully'}, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def get_sensor_with_latest_data(request):
+    try:
+        # Get the first sensor (since you're using only one)
+        sensor = Capteur.objects.first()
+        
+        # Get the latest reading for this sensor
+        latest_reading = Enregistrement.objects.filter(
+            id_capteur=sensor
+        ).order_by('-date_enregistrement').first()
+
+        if sensor and latest_reading:
+            data = {
+                'sensor': {
+                    'id': sensor.id_capteur,
+                    'name': sensor.nom_capteur,
+                    'latitude': sensor.latitude,
+                    'longitude': sensor.longitude,
+                },
+                'latest_reading': {
+                    'temperature': latest_reading.temperature,
+                    'humidity': latest_reading.humidite,
+                    'timestamp': latest_reading.date_enregistrement
+                }
+            }
+            return Response(data)
+        return Response({'error': 'No sensor or readings found'}, status=404)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)

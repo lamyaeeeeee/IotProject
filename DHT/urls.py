@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/temperature-thresholds/', api.temperature_thresholds, name='temperature-thresholds'),
     path('api/operators/', api.get_operators, name='get_operators'),
     path('api/operator-assignments/', api.operator_assignments, name='operator_assignments'),
+    path('api/sensor-data/', api.get_sensor_with_latest_data, name='sensor-data'),
 ]
