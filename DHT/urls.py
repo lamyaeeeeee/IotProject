@@ -20,4 +20,5 @@ urlpatterns = [
     path('api/enregistrements/', enregistrement_list, name='enregistrement-list'),
     path('api/operateurs/', operateur_list, name='operateur-list'),
     path('api/operateurs/<int:pk>/', operateur_detail, name='operateur-detail'),
+    path('api/sensor-data/', api.get_sensor_with_latest_data, name='sensor-data'),
 ]
