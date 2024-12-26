@@ -1,11 +1,5 @@
 from .models import Enregistrement  # Replace Dht11 with Enregistrement
 from .serializers import EnregistrementSerializer  # Update serializer name
-from .models import TemperatureThreshold
-from .serializers import TemperatureThresholdSerializer
-from .models import OperatorAssignment
-from .serializers import OperatorAssignmentSerializer
-from .models import Utilisateur
-from .serializers import UtilisateurSerializer
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
@@ -82,55 +76,3 @@ def enregistrement_list(request):
     enregistrements = Enregistrement.objects.all().order_by('-date_enregistrement')  # Latest first
     serializer = EnregistrementSerializer(enregistrements, many=True)
     return Response(serializer.data)
-
-@api_view(['GET', 'POST'])
-def temperature_thresholds(request):
-    if request.method == 'GET':
-        thresholds = TemperatureThreshold.objects.all()
-        serializer = TemperatureThresholdSerializer(thresholds, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        # Clear existing thresholds
-        TemperatureThreshold.objects.all().delete()
-        
-        # Create new thresholds
-        for threshold_data in request.data:
-            serializer = TemperatureThresholdSerializer(data=threshold_data)
-            if serializer.is_valid():
-                serializer.save()
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response({'message': 'Thresholds updated successfully'}, status=status.HTTP_201_CREATED)
-    
-@api_view(['GET'])
-def get_operators(request):
-    technician = Utilisateur.objects.filter(role='technician').first()
-    manager = Utilisateur.objects.filter(role='manager').first()
-    
-    operators = {
-        'technician': UtilisateurSerializer(technician).data if technician else None,
-        'manager': UtilisateurSerializer(manager).data if manager else None
-    }
-    return Response(operators)
-
-@api_view(['GET', 'POST'])
-def operator_assignments(request):
-    if request.method == 'GET':
-        assignments = OperatorAssignment.objects.all()
-        serializer = OperatorAssignmentSerializer(assignments, many=True)
-        return Response(serializer.data)
-    
-    elif request.method == 'POST':
-        # Clear existing assignments
-        OperatorAssignment.objects.all().delete()
-        
-        for assignment_data in request.data:
-            serializer = OperatorAssignmentSerializer(data=assignment_data)
-            if serializer.is_valid():
-                serializer.save()
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response({'message': 'Assignments updated successfully'}, status=status.HTTP_201_CREATED)
