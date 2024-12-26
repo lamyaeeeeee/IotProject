@@ -71,6 +71,8 @@ def Dlist(request):
         else:
             return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
 @api_view(['GET'])
 def enregistrement_list(request):
     enregistrements = Enregistrement.objects.all().order_by('-date_enregistrement')  # Latest first
