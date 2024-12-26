@@ -22,3 +22,7 @@ class OperatorAssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = OperatorAssignment
         fields = ['id_assignment', 'operator', 'max_alerts']
+class OperateurSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Utilisateur
+        fields = '__all__'
