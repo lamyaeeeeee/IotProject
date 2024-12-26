@@ -18,5 +18,7 @@ urlpatterns = [
     path('chart-data-mois/',views.chart_data_mois,name='chart-data-mois'),
     path('', views.home, name='home'),
     path('api/enregistrements/', enregistrement_list, name='enregistrement-list'),
-
+    path('api/temperature-thresholds/', api.temperature_thresholds, name='temperature-thresholds'),
+    path('api/operators/', api.get_operators, name='get_operators'),
+    path('api/operator-assignments/', api.operator_assignments, name='operator_assignments'),
 ]
