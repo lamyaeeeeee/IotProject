@@ -8,7 +8,6 @@ class Utilisateur(models.Model):
     telephone = models.TextField(null=True, blank=True)
     mot_de_passe = models.TextField()
     role = models.TextField()
-    token = models.TextField(null=True, blank=True)
     id_telegram = models.TextField(unique=True, null=True, blank=True)
 
 class Capteur(models.Model):
@@ -22,7 +21,8 @@ class Enregistrement(models.Model):
     id_capteur = models.ForeignKey(Capteur, on_delete=models.CASCADE)
     temperature = models.FloatField()
     humidite = models.FloatField()
-    date_enregistrement = models.DateTimeField(auto_now_add=True)
+    date_enregistrement = models.DateTimeField(default=None, null=True, blank=True)
+
 
 class Incident(models.Model):
     id_incident = models.BigAutoField(primary_key=True)
