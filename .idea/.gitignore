@@ -2,3 +2,4 @@
 /shelf/
 /workspace.xml
 DHT/__pycache__/*
+DHT/migrations/__pycache__/*
