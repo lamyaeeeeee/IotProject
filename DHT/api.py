@@ -49,7 +49,7 @@ def Dlist(request):
             serial.save()
 
             temp = serial.validated_data['temperature']  # Use the updated field name
-            if temp > 10:  # Trigger alerts if the temperature exceeds the threshold
+            if temp > 100:  # Trigger alerts if the temperature exceeds the threshold
 
                 # Send WhatsApp alert
                 send_whatsapp_alert(temp)

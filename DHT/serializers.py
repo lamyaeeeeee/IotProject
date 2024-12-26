@@ -1,7 +1,14 @@
 from rest_framework import serializers
 from .models import Enregistrement  # Import the updated model
-
-class EnregistrementSerializer(serializers.ModelSerializer):  # Update serializer name
+from .models import  Utilisateur
+class EnregistrementSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Enregistrement  # Use the updated model
-        fields = '__all__'  # Include all fields of the Enregistrement model
+        model = Enregistrement
+        fields = '__all__'
+        extra_kwargs = {
+            'date_enregistrement': {'required': False},
+        }
+class OperateurSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Utilisateur
+        fields = '__all__'
