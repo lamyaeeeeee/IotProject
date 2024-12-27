@@ -16,7 +16,7 @@ EMAIL_HOST = 'smtp.gmail.com'  # remplacer avec l'adresse SMTP de votrefournisse
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # ou False, selon la configuration de votrefournisseur de messagerie
 EMAIL_HOST_USER = 'lamyaeouladali@gmail.com'
-EMAIL_HOST_PASSWORD = '---'
+EMAIL_HOST_PASSWORD = 'tidz whdr ybss dyju'
 
 from pathlib import Path
 
