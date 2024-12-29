@@ -17,9 +17,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # ou False, selon la configuration de votrefournisseur de messagerie
 EMAIL_HOST_USER = 'lamyaeouladali@gmail.com'
 EMAIL_HOST_PASSWORD = 'tidz whdr ybss dyju'
-#CELERY_BROKER_URL = 'redis://localhost:6379/0'
-#CELERY_ACCEPT_CONTENT = ['json']
-#CELERY_TASK_SERIALIZER = 'json'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,7 +41,8 @@ SECRET_KEY = 'django-insecure-^%p4u2zjdhbmm5-!6vedp%p_-wo7v&95%a)cq9#ic%cnazm()r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['douaelamyae.pythonanywhere.com']
+
 
 
 # Application definition
@@ -57,26 +58,24 @@ INSTALLED_APPS = [
     'DHT',
     'twilio',
     'corsheaders',
+    'django_celery_beat',
 
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CSRF_USE_SESSIONS = False
-CSRF_COOKIE_HTTPONLY = False
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-CORS_ALLOW_ALL_ORIGINS= True
+
+
 CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ALLOW_ALL_ORIGINS= True
 CORS_ALLOW_HEADERS = [
     'authorization',
     'content-type',
@@ -115,7 +114,7 @@ ROOT_URLCONF = 'projet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],  # Add the path to the templates directory
+        'DIRS': [os.path.join(BASE_DIR, 'Template')],  # Add the path to the templates directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -171,16 +170,15 @@ TIME_ZONE = 'Africa/Casablanca'
 USE_I18N = True
 
 USE_TZ = True
-SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
