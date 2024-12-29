@@ -9,31 +9,41 @@ from django.http import JsonResponse
 
 @api_view(["POST"])
 def api_login(request):
-    if request.method == "POST":
-        # Parse JSON request data
-        email = request.data.get('email')
-        password = request.data.get('password')
+    email = request.data.get('email')
+    password = request.data.get('password')
 
-        if not email or not password:
-            return Response({'message': 'Email and password are required'}, status=status.HTTP_400_BAD_REQUEST)
+    if not email or not password:
+        return Response(
+            {'message': 'Email and password are required'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
-        try:
-            user = Utilisateur.objects.get(email=email)
+    try:
+        user = Utilisateur.objects.get(email=email)
 
-            # Compare plain-text password directly
-            if password == user.mot_de_passe:  # No hashing
-                # Set session data
-                request.session['user_id'] = user.id_utilisateur
-                request.session['role'] = user.role
+        if password == user.mot_de_passe:
+            # Créer une session
+            request.session['user_id'] = user.id_utilisateur
+            request.session['role'] = user.role
+            request.session.save()  # Important pour sauvegarder la session
 
-                return Response({'message': 'Login successful', 'role': user.role}, status=status.HTTP_200_OK)
-            else:
-                return Response({'message': 'Invalid password'}, status=status.HTTP_401_UNAUTHORIZED)
+            response = Response(
+                {'message': 'Login successful', 'role': user.role},
+                status=status.HTTP_200_OK
+            )
+            response['Access-Control-Allow-Credentials'] = 'true'
+            return response
+        else:
+            return Response(
+                {'message': 'Invalid password'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
 
-        except Utilisateur.DoesNotExist:
-            return Response({'message': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
-
-    return Response({'message': 'Invalid request method'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    except Utilisateur.DoesNotExist:
+        return Response(
+            {'message': 'User does not exist'},
+            status=status.HTTP_404_NOT_FOUND
+        )
 
 
 @login_required
