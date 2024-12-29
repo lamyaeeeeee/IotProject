@@ -31,6 +31,14 @@ class Incident(models.Model):
     debut_incident = models.DateTimeField()
     fin_incident = models.DateTimeField(null=True, blank=True)
     statut_incident = models.TextField()
+    type_incident = models.TextField(null=True, blank=True)  # Champ pour insérer le type d'incident librement
+    responsable = models.ForeignKey(Utilisateur, on_delete=models.SET_NULL, null=True, blank=True)
+
+    @property
+    def can_acknowledge(self):
+        return self.fin_incident is None
+
+
 
 class Alerte(models.Model):
     id_alerte = models.BigAutoField(primary_key=True)
