@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'DHT',
     'twilio',
     'corsheaders',
-    'django_celery_beat',
 
 ]
 
