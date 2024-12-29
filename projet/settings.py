@@ -94,7 +94,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://lamyaeDouae.pythonanywhere.com",
+    "https://douaelamyae.pythonanywhere.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",  # Si vous utilisez cette adresse
     "http://192.168.1.14:3000",  # Si vous accédez depuis une autre machine sur le réseau
@@ -102,7 +102,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://lamyaeDouae.pythonanywhere.com",
+    "https://douaelamyae.pythonanywhere.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://192.168.1.14:3000",
