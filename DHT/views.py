@@ -15,11 +15,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
-
+from django.views.generic import TemplateView
 
 def home(request):
-    return render(request, 'home.html')
-
+    # Instead of looking for home.html, serve the React index.html
+    return TemplateView.as_view(template_name='index.html')(request)
 
 def table(request):
     derniere_ligne = Enregistrement.objects.last()  # Use Enregistrement model
