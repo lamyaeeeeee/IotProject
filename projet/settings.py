@@ -23,7 +23,7 @@ EMAIL_HOST_PASSWORD = 'tidz whdr ybss dyju'
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(_file_).resolve().parent.parent
 
 import os
 
@@ -76,6 +76,7 @@ CSRF_COOKIE_HTTPONLY = False
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CORS_ALLOW_ALL_ORIGINS= True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True 
 CORS_ALLOW_HEADERS = [
     'authorization',
     'content-type',
@@ -170,10 +171,10 @@ TIME_ZONE = 'Africa/Casablanca'
 USE_I18N = True
 
 USE_TZ = True
-SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'None'
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SECURE = False
 
 
 # Static files (CSS, JavaScript, Images)
