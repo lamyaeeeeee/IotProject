@@ -109,6 +109,11 @@ CSRF_TRUSTED_ORIGINS = [
     "http://192.168.1.14:3000",
 ]
 
+# Add these settings
+CORS_ORIGIN_WHITELIST = [
+    "https://douaelamyae.pythonanywhere.com",
+]
+
 ROOT_URLCONF = 'projet.urls'
 
 TEMPLATES = [
@@ -174,8 +179,8 @@ CSRF_COOKIE_SECURE = False  # Set to True in production
 CSRF_USE_SESSIONS = False
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_SECURE = False  # Set to True in production
-SESSION_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'
 
 
 # Static files (CSS, JavaScript, Images)
