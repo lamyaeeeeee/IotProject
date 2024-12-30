@@ -17,9 +17,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # ou False, selon la configuration de votrefournisseur de messagerie
 EMAIL_HOST_USER = 'lamyaeouladali@gmail.com'
 EMAIL_HOST_PASSWORD = 'tidz whdr ybss dyju'
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,13 +39,14 @@ SECRET_KEY = 'django-insecure-^%p4u2zjdhbmm5-!6vedp%p_-wo7v&95%a)cq9#ic%cnazm()r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['douaelamyae.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,8 +56,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'DHT',
     'twilio',
-    'corsheaders',
-    'django_celery_beat',
 
 ]
 
@@ -95,7 +92,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://douaelamyae.pythonanywhere.com",
+    "https://lamyaedouaeprojet.pythonanywhere.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",  # Si vous utilisez cette adresse
     "http://192.168.1.14:3000",  # Si vous accédez depuis une autre machine sur le réseau
@@ -103,7 +100,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://douaelamyae.pythonanywhere.com",
+    "https://lamyaedouaeprojet.pythonanywhere.com",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://192.168.1.14:3000",
@@ -111,7 +108,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Add these settings
 CORS_ORIGIN_WHITELIST = [
-    "https://douaelamyae.pythonanywhere.com",
+    "https://lamyaedouaeprojet.pythonanywhere.com",
 ]
 
 ROOT_URLCONF = 'projet.urls'
