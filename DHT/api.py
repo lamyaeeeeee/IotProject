@@ -139,7 +139,12 @@ def Dlist(request):
                         id_utilisateur=first_operator,
                         date_alerte__gte=now() - timedelta(seconds=10)  # Éviter les doublons récents
                     ).exists():
-                        send_alerts(first_operator, f"Alerte initiale : Incident {incident.id_capteur.nom_capteur} avec {incident.temperature_detectee}°C")
+                        send_alerts(
+                            first_operator,
+                            f"Initial Alert: Incident detected on {incident.id_capteur.nom_capteur}. "
+                            f"Temperature: {incident.temperature_detectee}°C. "
+                            f"Incident Type: {incident.type_incident.capitalize()}."
+                        )
                         Alerte.objects.create(
                             id_incident=incident,
                             id_utilisateur=first_operator,
