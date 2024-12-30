@@ -74,7 +74,7 @@ MIDDLEWARE = [
 ]
 
 
-CORS_ALLOW_CREDENTIALS = True
+CSRF_USE_SESSIONS = True
 CORS_ALLOW_ALL_ORIGINS= True
 CORS_ALLOW_HEADERS = [
     'authorization',
@@ -101,6 +101,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.1.14:3000",  # Si vous accédez depuis une autre machine sur le réseau
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://douaelamyae.pythonanywhere.com",
@@ -109,6 +110,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://192.168.1.14:3000",
 ]
 
+CSRF_COOKIE_NAME = 'csrftoken'
 # Add these settings
 CORS_ORIGIN_WHITELIST = [
     "https://douaelamyae.pythonanywhere.com",
