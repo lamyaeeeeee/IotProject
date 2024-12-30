@@ -1,13 +1,13 @@
-from django.contrib.auth.hashers import check_password
-from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Utilisateur
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 
-
+@csrf_exempt
 @api_view(["POST"])
+@permission_classes([AllowAny])
 def api_login(request):
     email = request.data.get('email')
     password = request.data.get('password')
@@ -22,16 +22,19 @@ def api_login(request):
         user = Utilisateur.objects.get(email=email)
 
         if password == user.mot_de_passe:
-            # Créer une session
             request.session['user_id'] = user.id_utilisateur
             request.session['role'] = user.role
-            request.session.save()  # Important pour sauvegarder la session
+            request.session.save()
 
-            response = Response(
-                {'message': 'Login successful', 'role': user.role},
-                status=status.HTTP_200_OK
-            )
-            response['Access-Control-Allow-Credentials'] = 'true'
+            response = Response({
+                'message': 'Login successful',
+                'role': user.role,
+                'user_id': user.id_utilisateur
+            })
+            
+            # Add CORS headers
+            response["Access-Control-Allow-Origin"] = "https://douaelamyae.pythonanywhere.com"
+            response["Access-Control-Allow-Credentials"] = "true"
             return response
         else:
             return Response(
@@ -44,8 +47,6 @@ def api_login(request):
             {'message': 'User does not exist'},
             status=status.HTTP_404_NOT_FOUND
         )
-
-
 @login_required
 def get_user_role(request):
     if request.user.is_authenticated:
